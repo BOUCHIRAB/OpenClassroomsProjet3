@@ -53,6 +53,7 @@ function  Filtrer(menu,works){
 }
 
 
+
 ////Récupération des projets
 const RecupWorks = async function() {
     const ResultatWorks = await fetch('http://localhost:5678/api/works');
@@ -78,6 +79,11 @@ promise1.then(works => {
   /*Appel de la fonction pour afficher tous les travaux à l'ouverture de la page*/
     Afficher(works);
 
+const ValeurToken = window.localStorage.getItem("token");
+console.log(ValeurToken)
+/*ValeurToken=="";*/
+
+    if (ValeurToken==null) {
     const categories=RecupCategories()
     const promise2 = Promise.resolve(categories);
     promise2.then(categories => {
@@ -86,35 +92,60 @@ promise1.then(works => {
         /*Appel de la fonction permettant d'afficher la catégorie sélectionnée*/
         Filtrer(categories,works)
     });
+    } else {
+        const BtnLogin = document.getElementById("id_login");
+        BtnLogin.remove();
+        const BtnLogout= document.createElement("a");
+        BtnLogout.href="#";
+        BtnLogout.innerText="logout";
+        BtnLogout.id="Btn_deconnexion"
+        const MenuLogout = document.getElementById("menu_connexion");
+        MenuLogout.appendChild(BtnLogout);
+
+        
+        const IconeModif=document.createElement("i");
+        IconeModif.className="fa-regular fa-pen-to-square";
+
+       
+        const TitreModif=document.createElement("span");
+        TitreModif.innerText="Modifier";
+
+        const MenuModif=document.getElementById("Menu_modif");
+        MenuModif.appendChild(IconeModif);
+        MenuModif.appendChild(TitreModif);
+
+       
+       const Deconnexion = document.getElementById("Btn_deconnexion");
+        Deconnexion.addEventListener("click", () => {
+                window.localStorage.removeItem("token");
+           console.log(window.localStorage.getItem("token"))
+           document.querySelector(".gallery").innerHTML = "";
+
+           BtnLogout.remove();
+           IconeModif.remove();
+           TitreModif.remove();
+           
+           const BtnReLogin= document.createElement("a");
+           BtnReLogin.href="login.html";
+           BtnReLogin.innerText="login";
+            MenuLogout.appendChild(BtnReLogin);
+
+
+                Afficher(works);
+                const categories=RecupCategories()
+                const promise2 = Promise.resolve(categories);
+                promise2.then(categories => {
+                    categories;
+
+                    /*Appel de la fonction permettant d'afficher la catégorie sélectionnée*/
+                    Filtrer(categories,works)
+
+                    /////////remove le bouton logout!!
+    });
+            });
+             
+    
+    }
   
 });
 
-
-/*
-const ValeurToken = window.localStorage.getItem("token");
-console.log(ValeurToken)
-
-if (ValeurToken==="") {
-   
-} else {
-    console.log ("Afficher la modale et le  logout")
-
-
-   
-    const BtnLogin = document.getElementById("id_login");
-    BtnLogin.remove();
-    const BtnLogout= document.createElement("imput");
-    BtnLogout.Type="button";
-    BtnLogout.innerText="logout";
-    BtnLogout.id="Btn_deconnexion"
-    const MenuLogout = document.getElementById("menu_connexion");
-    MenuLogout.appendChild(BtnLogout);
-   
-    const Deconnexion = document.getElementById("Btn_deconnexion");
-    Deconnexion.addEventListener("click", () => {
-            window.localStorage.removeItem("token");
-       
-        });
-         
-}
-*/
