@@ -1,7 +1,6 @@
 
 function checkInputFile(name, value) {
 	if (value === "") {
-		console.log(`Veuillez préciser le champ : " ${name}"`);
 		throw new Error(`Veuillez préciser le champ : "${name}"`);
 	}
 }
@@ -35,7 +34,6 @@ function authentification() {
 			const userLogin = JSON.stringify(user);
 			fetchLogin(userLogin);
 		} catch (error) {
-			console.log(error)
 			errorMessage(error)
 		}
 	})

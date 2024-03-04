@@ -210,7 +210,10 @@ figcaption {
 	grid-row-gap: 16px;
 }
 
-.Img_gallery {height: 407px;}
+.Img_gallery {
+	height: 407px;
+	width: 305px;
+}
 
 #contact {
 	display: flex;
@@ -317,7 +320,7 @@ a {
 	color :#1D6154;
 	padding : 9px 20px;
 	margin : 0px 6px ;
-	font-style: 'Syne';
+	font-family: 'Syne';
 	font-weight: 700;
 	line-height: 19px;
 	letter-spacing: 0em;

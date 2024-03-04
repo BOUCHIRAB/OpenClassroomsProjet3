@@ -7,13 +7,13 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="crossorigin="anonymous" referrerpolicy="no-referrer">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
 		<meta name="description" content="">
 		<link rel="stylesheet" href="./assets/style.css">
 		<script src="./scripts/projets.js" defer ></script>
 		<script src="./scripts/main.js" defer></script>
 	</head>
-	<body >
+	<body>
 		<aside id="banner">
 			<div >
 				<i class="fa-regular fa-pen-to-square"></i> 
@@ -32,7 +32,7 @@
 			</nav>
 		</header>
 		<main>
-			<section id="introduction">
+			<div id="introduction">
 				<figure >
 					<img src="./assets/images/sophie-bluel.png" alt="photo de Sophie Bluel" id="img_intro" >
 				</figure>
@@ -42,7 +42,7 @@
 					<p> Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 					<p> En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
 				</article>
-			</section>
+			</div>
 			<section id="portfolio">
 				<h2 id="title_portfolio">Mes projets</h2>
 				<div class="filter_bar"></div>
@@ -69,36 +69,37 @@
 				</ul>
 			</nav>
 		</footer>
-		<aside id="modal1" aria-hidden="true" role="dialog" daria-labelledby="title">
+		<div id="modal1" aria-hidden="true" role="dialog">
 			<div class="modal-wrapper">
 				<div class="menu_icon">
 					<button class="js-modal-return"><i class="fa-solid fa-arrow-left"></i></button>
-					<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></div>
-					<h1 class="modal_title">Galerie photo</h1>
-					<div class="Mgallery"></div>
-					<hr class="bar_modal1">
-					<button class="btn_modal">Ajouter une photo</button>
-					<form method="POST" url="/upload-picture" enctype="multipart/form-data" class="form_addWork" >
-						<div id="insert_img">
-							<img src="#" alt="" id="selection_img" >
-							<div id="hide_insert_img" >
-								<i class="fa-regular fa-image" id="iModalImage"></i>
-								<label for="btn_select" id="label_img">+ Ajouter photo</label>
-								<input type="file" name="btn_select" id="btn_select" accept=".png, .jpg,">
-								<p>	jpg, png : 4mo max </p>
-							</div>
-						</div>
-						<label for="add_title" id="add_picture">Titre</label>
-						<input type="text" name="add_title" id="add_title">
-						<label for="add_category" id="Select_cat">Catégorie</label>
-						<select name="add_category" id="add_category">
-							<option value="" selected></option>
-						</select>
-						<hr class="bar_modal2">
-						<input type="submit" value="Valider" id="submit_add">
-					</form>
+					<button class="js-modal-close"><i class="fa-solid fa-xmark"></i></button>
 				</div>
-			</aside>
+				<h1 class="modal_title">Galerie photo</h1>
+				<div class="Mgallery"></div>
+				<hr class="bar_modal1">
+				<button class="btn_modal">Ajouter une photo</button>
+				<form method="POST"  enctype="multipart/form-data" class="form_addWork" >
+					<div id="insert_img">
+						<img src="#" alt="" id="selection_img" >
+						<div id="hide_insert_img" >
+							<i class="fa-regular fa-image" id="iModalImage"></i>
+							<label for="btn_select" id="label_img">+ Ajouter photo</label>
+							<input type="file" name="btn_select" id="btn_select" accept=".png, .jpg">
+							<p>	jpg, png : 4mo max </p>
+						</div>
+					</div>
+					<label for="add_title" id="add_picture">Titre</label>
+					<input type="text" name="add_title" id="add_title">
+					<label for="add_category" id="Select_cat">Catégorie</label>
+					<select name="add_category" id="add_category">
+						
+					</select>
+					<hr class="bar_modal2">
+					<input type="submit" value="Valider" id="submit_add">
+				</form>
+			</div>
+		</div>
 		</body>
 	</html>
 

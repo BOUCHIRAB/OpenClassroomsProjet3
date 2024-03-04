@@ -38,31 +38,36 @@ function filterMenu(data) {
 		filterButton.dataset.id = categories[i].id;
 		filterButton.innerText = categories[i].name;
 		filterButton.className = "filterButton";
-		const filterBar = document.querySelector(".filter_bar");
 		filterBar.appendChild(filterButton);
 	}
 }
 ///Affichage des travaux de la catégorie sélectionnée
 function filterGallery(works) {
 	const selectedCategory = document.querySelectorAll(".filterButton");
-	for (let i = 0; i < selectedCategory.length; i++) {
-		selectedCategory[i].addEventListener("click", function() {
-			if (parseInt(selectedCategory[i].dataset.id) === 0) {
+	const noSelect = document.querySelector(".filterAll");
+	noSelect.addEventListener("click", function() {
+		if (noSelect.dataset.id === "0") {
 				document.querySelector(".gallery").innerHTML = "";
 				viewGallery(works);
-			} else {
-				let Works_filtres = works.filter(function(work) {
-					return work.categoryId == selectedCategory[i].dataset.id;
-				})
-				document.querySelector(".gallery").innerHTML = "";
-				viewGallery(Works_filtres);
 			}
+		})
+	for (let i = 0; i < selectedCategory.length; i++) {
+		selectedCategory[i].addEventListener("click", function() {
+			let Works_filtres = works.filter(function(work) {
+			return work.categoryId == selectedCategory[i].dataset.id;
+			})
+			document.querySelector(".gallery").innerHTML = "";
+			viewGallery(Works_filtres);
 		})
 	}
 }
+
 /////Création de la liste déroulante des catégories dans la 2ème modale
 function categoryModal(categories) {
 	const categoryList = document.getElementById("add_category");
+	const optionCatNull = document.createElement("option");
+	optionCatNull.innerText="";
+	categoryList.appendChild(optionCatNull);
 	for (let i = 0; i < categories.length; i++) {
 		const optionCat = document.createElement("option");
 		optionCat.value = categories[i].id;
@@ -79,11 +84,11 @@ function viewGalleryModal(works) {
 		tagImg.src = works[i].imageUrl;
 		tagImg.alt = works[i].title;
 		tagImg.className = "ImageModale";
-		linkIcon = document.createElement("a");
+		const linkIcon = document.createElement("a");
 		linkIcon.href = "#";
 		linkIcon.id = works[i].id;
 		linkIcon.className = "lien_suppr";
-		deleteIcone = document.createElement("i");
+		const deleteIcone = document.createElement("i");
 		deleteIcone.className = "fa-solid fa-trash-can";
 		const Mgallery = document.querySelector(".Mgallery");
 		Mgallery.appendChild(imgIcon);
@@ -97,7 +102,7 @@ function viewGalleryModal(works) {
 /////Récupération de toutes les données de l'API et chargement de la page d'accueil et des modales
 function loadingData() {
 	fetch("http://localhost:5678/api/categories").then(response => response.json()).then(data => {
-		categories = data;
+		let categories = data;
 		filterMenu(categories);
 		categoryModal(categories);
 		return categories
@@ -134,9 +139,9 @@ function adminPage() {
 	editMenu.appendChild(editIcon);
 	editMenu.appendChild(editTitle);
 	///Affichage d'une bannière en haut de page
-	banner = document.getElementById("banner");
+	const banner = document.getElementById("banner");
 	banner.style.display = "block";
-	marginIntro = document.getElementById("introduction");
+	const marginIntro = document.getElementById("introduction");
 	marginIntro.style.marginTop = "90px";
 	//Appel de la fonction permettant l'ajout d'un Listener sur le bouton logout 
 	logoutAdmin();
@@ -153,14 +158,14 @@ function logoutAdmin() {
 		///suppression du bouton logout
 		disconnectButton.remove();
 		///Supression du lien "modifier" et son icone
-		editIcon = document.querySelectorAll(".fa-pen-to-square");
+		const editIcon = document.querySelectorAll(".fa-pen-to-square");
 		editIcon[1].remove();
-		editTitle = document.querySelectorAll(".js-modal");
+		const editTitle = document.querySelectorAll(".js-modal");
 		editTitle[1].remove();
 		///Suppresion de la bannière en haut de page et réajustement des marges
-		banner = document.getElementById("banner");
+		const banner = document.getElementById("banner");
 		banner.style.display = "none";
-		marginIntro = document.getElementById("introduction");
+		const marginIntro = document.getElementById("introduction");
 		marginIntro.style.marginTop = "142px";
 		const editMenu = document.getElementById("title_portfolio");
 		editMenu.style.marginBottom = "45px";
@@ -201,7 +206,7 @@ function deleteWork() {
 	for (let i = 0; i < deleteSelected.length; i++) {
 		deleteSelected[i].addEventListener("click", (event) => {
 			event.preventDefault();
-			deleteID = deleteSelected[i].id;
+			let deleteID = deleteSelected[i].id;
 			fetchDelete(deleteID);
 			document.querySelector(".btn_modal").focus();
 		})
@@ -221,7 +226,6 @@ function fetchDelete(deleteID) {
 			document.getElementById(`figure${deleteID}`).remove();
 			alert(`Projet ${deleteID} supprimé`);
 		} else {
-			console.log("Echec de la suppression du projet");
 			throw new Error("Echec de suppression du projet");
 		}
 	}).catch(alert);
@@ -270,9 +274,9 @@ function viewSelectedImg(insertImg) {
 			if (types.includes(btn_select.type)) {
 				document.getElementById("hide_insert_img").style.display = "none";
 				const reader = new FileReader();
-				reader.onload = function(e) {
-					selectedImg.src = e.target.result;
-					colorButton = document.getElementById("submit_add");
+				reader.onload = function(event) {
+					selectedImg.src = event.target.result;
+					const colorButton = document.getElementById("submit_add");
 					colorButton.style.background = "#1D6154";
 					colorButton.focus();
 				}
@@ -285,13 +289,13 @@ function viewSelectedImg(insertImg) {
 function fillingForm() {
 	document.getElementById("add_title").addEventListener("change", (e) => {
 		e.preventDefault();
-		colorButton = document.getElementById("submit_add");
+		const colorButton = document.getElementById("submit_add");
 		colorButton.style.background = "#1D6154";
 		colorButton.focus();
 	})
 	document.getElementById("add_category").addEventListener("change", (e) => {
 		e.preventDefault();
-		colorButton = document.getElementById("submit_add");
+		const colorButton = document.getElementById("submit_add");
 		colorButton.style.background = "#1D6154";
 		colorButton.focus();
 	})
@@ -329,59 +333,27 @@ function returnModal1() {
 ///Vérification des champs de saisie
 function checkInputFile(name, value) {
 	if (value === "") {
-		console.log(`Veuillez préciser le champ : ${name}`);
 		throw new Error(`Veuillez préciser le champ : ${name}`);
 	}
 }
 
 function checkUrl(value) {
 	if (value === "") {
-		console.log("Veuillez sélectionner un projet");
 		throw new Error("Veuillez sélectionner un projet");
 	}
-}
-/////Ajout d'un nouveau projet
-function formAddValidation() {
-	const form = document.querySelector('.form_addWork');
-	form.addEventListener("submit", (event) => {
-		event.preventDefault();
-		try {
-			uploadImageInput = document.querySelector("#btn_select");
-			file = uploadImageInput.files[0];
-			checkUrl(uploadImageInput.value);
-			title = event.target.querySelector("[name=add_title]").value;
-			checkInputFile("Titre", title);
-			selectElmt = document.getElementById("add_category");
-			category = selectElmt.options[selectElmt.selectedIndex].value;
-			checkInputFile("Catégorie", category);
-			///Création d'un objet FormData pour l'envoi de la requête
-			formData = new FormData();
-			formData.append("title", title);
-			formData.append("category", parseInt(category));
-			formData.append("image", file);
-			//Envoi des données à l'API
-			addWork(formData);
-			closeModal(event);
-		} catch (erreur) {
-			console.log(erreur)
-			alert(erreur)
-		}
-	})
 }
 
 function addWork(formData) {
 	///Envoi du nouveau projet 
 	fetch("http://localhost:5678/api/works", {
 		method: "POST",
-		headers: {"Authorization": `Bearer ${tokenValue}`	},
+		headers: {"Authorization": `Bearer ${tokenValue}`},
 		body: formData
 	}).then((response) => {
 		response;
 		if (response.ok) {
-			console.log("Transmission réussie");
 			return response.json();
 		} else {
-			console.log("Echec de transmission du projet");
 			throw new Error("Echec de transmission du projet");
 		}
 	}).then(data => {
@@ -405,11 +377,11 @@ function addWork(formData) {
 		tagImgM.src = data.imageUrl;
 		tagImgM.alt = data.title;
 		tagImgM.className = "ImageModale";
-		linkIcon = document.createElement("a");
+		const linkIcon = document.createElement("a");
 		linkIcon.href = "#";
 		linkIcon.id = data.id;
 		linkIcon.className = "lien_suppr";
-		deleteIcone = document.createElement("i");
+		const deleteIcone = document.createElement("i");
 		deleteIcone.className = "fa-solid fa-trash-can";
 		deleteIcone.id = data.id;
 		const Mgallery = document.querySelector(".Mgallery");
@@ -419,7 +391,7 @@ function addWork(formData) {
 		linkIcon.appendChild(deleteIcone);
 		//Réinitialisaion du formulaire
 		document.querySelector('.form_addWork').reset();
-		colorButton = document.getElementById("submit_add")
+		const colorButton = document.getElementById("submit_add")
 		colorButton.style.background = "#6f717099";
 		document.getElementById("hide_insert_img").style.display = "flex";
 		document.getElementById("selection_img").style.display = "none";
@@ -431,6 +403,34 @@ function addWork(formData) {
 		
 	}).catch(alert);
 }
+/////Ajout d'un nouveau projet
+function formAddValidation() {
+	const form = document.querySelector('.form_addWork');
+	form.addEventListener("submit", (event) => {
+		event.preventDefault();
+		try {
+			let uploadImageInput = document.querySelector("#btn_select");
+			let file = uploadImageInput.files[0];
+			checkUrl(uploadImageInput.value);
+			let title = event.target.querySelector("[name=add_title]").value;
+			checkInputFile("Titre", title);
+			let selectElmt = document.getElementById("add_category");
+			let category = selectElmt.options[selectElmt.selectedIndex].value;
+			checkInputFile("Catégorie", category);
+			///Création d'un objet FormData pour l'envoi de la requête
+			let formData = new FormData();
+			formData.append("title", title);
+			formData.append("category", parseInt(category));
+			formData.append("image", file);
+			//Envoi des données à l'API
+			addWork(formData);
+			closeModal(event);
+		} catch (erreur) {
+			alert(erreur)
+		}
+	})
+}
+
 ///////Fermeture de la modale
 function closeModal(e) {
 	if (modal === null) return
@@ -449,7 +449,7 @@ function closeModal(e) {
 	////Réinitialisation du formulaire 
 	const addForm = document.querySelector(".form_addWork");
 	addForm.reset();
-	colorButton = document.getElementById("submit_add");
+	const colorButton = document.getElementById("submit_add");
 	colorButton.style.background = "#6f717099";
 	document.getElementById("hide_insert_img").style.display = "flex";
 	document.getElementById("selection_img").style.display = "none";
