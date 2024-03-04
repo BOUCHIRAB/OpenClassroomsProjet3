@@ -2,10 +2,9 @@
 
 
 ///Récupération du la valeur du token 
-ValeurToken=window.localStorage.getItem("token");  
-console.log(ValeurToken)
+tokenValue=window.localStorage.getItem("token"); 
 
 ////Chargement des donnée et adaptation des fonctionnalité en fonction de la valeur du token
-LancementSite(ValeurToken)
+websiteLaunch(tokenValue)
 
 

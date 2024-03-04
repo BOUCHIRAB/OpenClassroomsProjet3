@@ -1,56 +1,47 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-	<meta charset="UTF-8">
-	<title>Sophie Bluel - Page de connexion</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
-	<script src="./scripts/login.js" defer ></script>
-	
-</head>
-<body>
-<header >
-	<h1>Sophie Bluel <span>ARCHITECTE D'INTERIEUR</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li id="Entete_login">login</li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
-</header>
-<main>
+	<head>
+		<meta charset="UTF-8">
+		<title>Sophie Bluel - Page de connexion</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+		<meta name="description" content="">
+		<link rel="stylesheet" href="./assets/style.css">
+		<script src="./scripts/login.js" defer ></script>
+	</head>
+	<body>
+		<header>
+			<h1>Sophie Bluel <span>ARCHITECTE D'INTERIEUR</span></h1>
+			<nav>
+				<ul>
+					<li>projets</li>
+					<li>contact</li>
+					<li id="header_login">login</li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<section class="login">
+				<h2>Log In</h2>
+				<form method="POST" class="form_login">
+					<label for="email">E-mail</label>
+					<input type="email" name="email" id="email_login" size="40">
+					<label for="passwd">Mot de passe </label>
+					<input type="password" name="passwd" id="passwd" size="30">
+					<input type="submit" value="Se connecter" class="btn_connexion">
+				</form>
+				<span><a href="#"> Mot de passe oublié </a></span>
+			</section>
+			<footer>
+				<nav>
+					<ul>
+						<li>Mentions Légales</li>
+					</ul>
+				</nav>
+			</footer>
+		</body>
+	</html>
 
-	<section class="login">
-	
-		<h2>Log In</h2>
-		<form method="POST" class="Fconnexion"> 
-				<div class="saisie">
-	  			<label for="email">E-mail</label>
-      			<input type="text" name="email" id="email_login" size="40">
-
-       			<label for="mdp">Mot de passe </label>
-      			<input type="text" name="mdp" id="mdp" size="30">
-			
-				<input type="submit" value="Se connecter" class="btn_connexion">
-			</div>
-		</form>	
-	
-		<span> <a href="#"> Mot de passe oublié </a> </span>
-
-	</section>
-
-<footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
-</footer>
-</body>
-</html>
